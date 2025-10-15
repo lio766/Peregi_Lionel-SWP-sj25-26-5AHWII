@@ -1,0 +1,43 @@
+//schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model player {
+  playerId        Int      @id @default(autoincrement())
+  name      String
+  teamId    Int?
+  team      team?    @relation(fields: [teamId], references: [teamId])
+}
+
+model team {
+  teamId      Int      @id @default(autoincrement())
+  name    String
+  players player[]
+  homeMatches match[] @relation("HomeTeam")
+  awayMatches match[] @relation("AwayTeam")
+  wonMatches match[] @relation("WinnerTeam")
+    
+}
+
+model match {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+    hometeamId Int
+    awayteamId Int
+    hometeam   team   @relation("HomeTeam", fields: [hometeamId], references: [teamId])
+    awayteam   team   @relation("AwayTeam", fields: [awayteamId], references: [teamId])
+    winnerId   Int
+    winner     team  @relation("WinnerTeam", fields: [winnerId], references: [teamId])
+    stadiumId  Int
+}
+
+model stadium {
+  stadiumId   Int      @id @default(autoincrement())
+  name     String
+  location String
+}

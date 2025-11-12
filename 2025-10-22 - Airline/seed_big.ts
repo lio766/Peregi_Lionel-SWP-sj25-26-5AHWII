@@ -1,6 +1,8 @@
 import { PrismaClient } from "model";
 import { faker } from "@faker-js/faker";
 
+
+import { disconnect } from "./repository/db.ts";
 const prisma = new PrismaClient();
 
 const TARGET = {
@@ -108,5 +110,5 @@ main()
         Deno.exit(1);
     })
     .finally(async () => {
-        await prisma.$disconnect();
+        await disconnect();
     });

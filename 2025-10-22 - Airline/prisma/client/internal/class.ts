@@ -23,7 +23,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "C:\\Peregi_Lionel-SWP-sj25-26-5AHWII\\2025-10-22 - Airline\\prisma\\client",
+      "value": "c:\\Peregi_Lionel-SWP-sj25-26-5AHWII\\2025-10-22 - Airline\\prisma\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -38,7 +38,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Peregi_Lionel-SWP-sj25-26-5AHWII\\2025-10-22 - Airline\\prisma\\schema.prisma",
+    "sourceFilePath": "c:\\Peregi_Lionel-SWP-sj25-26-5AHWII\\2025-10-22 - Airline\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "..",
@@ -48,6 +48,7 @@ const config: runtime.GetPrismaClientConfig = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

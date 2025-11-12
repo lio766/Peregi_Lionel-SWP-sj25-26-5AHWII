@@ -42,7 +42,7 @@ export { Prisma }
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node")
-path.join(process.cwd(), "client/query_engine-windows.dll.node")
+path.join(process.cwd(), "prisma/client/query_engine-windows.dll.node")
 
 /**
  * Model Airport

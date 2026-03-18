@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/prismaclient"
+  runtime  = "deno"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Filiale {
+  id        Int      @id @default(autoincrement())
+  name      String
+  abteilung Abteilung[]
+  mitarbeiter Mitarbeiter[]
+  exemplare Exemplar[]
+}
+
+model Abteilung {
+  id        Int      @id @default(autoincrement())
+  name      String
+  filialeId Int
+  filiale   Filiale   @relation(fields: [filialeId], references: [id])
+  buecher  Buch[]
+}
+
+model Mitarbeiter {
+  id        Int      @id @default(autoincrement())
+  name      String
+  filialeId Int
+  filiale   Filiale   @relation(fields: [filialeId], references: [id])
+
+  entlehnungs Entlehnung[]
+}
+
+model Buch {
+  id          Int      @id @default(autoincrement())
+  titel       String
+  autor       String
+  abteilungId Int
+  abteilung   Abteilung @relation(fields: [abteilungId], references: [id])
+  exemplare   Exemplar[]
+}
+
+model Exemplar {
+  id        Int      @id @default(autoincrement())
+  buchId    Int
+  buch      Buch     @relation(fields: [buchId], references: [id])
+  filialeId Int
+  filiale   Filiale   @relation(fields: [filialeId], references: [id])
+  entlehnung Entlehnung[]
+}
+
+model Kunde {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email      String?   @unique
+  entlehnungen Entlehnung[]
+}
+
+model Entlehnung {
+  id          Int      @id @default(autoincrement())
+  kundeId      Int
+  kunde        Kunde    @relation(fields: [kundeId], references: [id])
+  exemplarId  Int
+  exemplar    Exemplar @relation(fields: [exemplarId], references: [id])
+  mitarbeiterId Int
+  mitarbeiter   Mitarbeiter @relation(fields: [mitarbeiterId], references: [id])
+  entlehnungsDatum DateTime @default(now())
+  rueckgabeDatum DateTime?
+}
